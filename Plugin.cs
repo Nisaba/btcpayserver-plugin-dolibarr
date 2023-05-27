@@ -1,10 +1,10 @@
 using BTCPayServer.Abstractions.Contracts;
 using BTCPayServer.Abstractions.Models;
 using BTCPayServer.Abstractions.Services;
-using BTCPayServer.Plugins.Template.Services;
+using BTCPayServer.Plugins.Dolibarr.Services;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace BTCPayServer.Plugins.Template;
+namespace BTCPayServer.Plugins.Dolibarr;
 
 public class Plugin : BaseBTCPayServerPlugin
 {
@@ -15,14 +15,14 @@ public class Plugin : BaseBTCPayServerPlugin
 
     public override void Execute(IServiceCollection services)
     {
-        services.AddSingleton<IUIExtension>(new UIExtension("TemplatePluginHeaderNav", "header-nav"));
+        services.AddSingleton<IUIExtension>(new UIExtension("DolibarrPluginHeaderNav", "header-nav"));
         services.AddHostedService<ApplicationPartsLogger>();
         services.AddHostedService<PluginMigrationRunner>();
-        services.AddSingleton<MyPluginService>();
-        services.AddSingleton<MyPluginDbContextFactory>();
-        services.AddDbContext<MyPluginDbContext>((provider, o) =>
+        services.AddSingleton<DolibarrService>();
+        services.AddSingleton<DolibarrDbContextFactory>();
+        services.AddDbContext<DolibarrDbContext>((provider, o) =>
         {
-            MyPluginDbContextFactory factory = provider.GetRequiredService<MyPluginDbContextFactory>();
+            DolibarrDbContextFactory factory = provider.GetRequiredService<DolibarrDbContextFactory>();
             factory.ConfigureBuilder(o);
         });
     }

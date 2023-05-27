@@ -1,22 +1,22 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
 using BTCPayServer.Abstractions.Contracts;
-using BTCPayServer.Plugins.Template.Services;
+using BTCPayServer.Plugins.Dolibarr.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Hosting;
 
-namespace BTCPayServer.Plugins.Template;
+namespace BTCPayServer.Plugins.Dolibarr;
 
 public class PluginMigrationRunner : IHostedService
 {
-    private readonly MyPluginDbContextFactory _PluginDbContextFactory;
-    private readonly MyPluginService _PluginService;
+    private readonly DolibarrDbContextFactory _PluginDbContextFactory;
+    private readonly DolibarrService _PluginService;
     private readonly ISettingsRepository _settingsRepository;
 
     public PluginMigrationRunner(
         ISettingsRepository settingsRepository,
-        MyPluginDbContextFactory PluginDbContextFactory,
-        MyPluginService PluginService)
+        DolibarrDbContextFactory PluginDbContextFactory,
+        DolibarrService PluginService)
     {
         _settingsRepository = settingsRepository;
         _PluginDbContextFactory = PluginDbContextFactory;

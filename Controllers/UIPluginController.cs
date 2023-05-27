@@ -1,23 +1,26 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using BTCPayServer.Abstractions.Constants;
+using BTCPayServer.Abstractions.Contracts;
 using BTCPayServer.Client;
-using BTCPayServer.Plugins.Template.Data;
-using BTCPayServer.Plugins.Template.Services;
+using BTCPayServer.Plugins.Dolibarr.Data;
+using BTCPayServer.Plugins.Dolibarr.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace BTCPayServer.Plugins.Template;
+namespace BTCPayServer.Plugins.Dolibarr;
 
-[Route("~/plugins/template")]
+[Route("~/plugins/dolibarr")]
 [Authorize(AuthenticationSchemes = AuthenticationSchemes.Cookie, Policy = Policies.CanViewProfile)]
 public class UIPluginController : Controller
 {
-    private readonly MyPluginService _PluginService;
+    private readonly ISettingsRepository _SettingsRepository;
+    private readonly DolibarrService _PluginService;
 
-    public UIPluginController(MyPluginService PluginService)
+    public UIPluginController(DolibarrService PluginService, ISettingsRepository settingsRepository)
     {
         _PluginService = PluginService;
+        _SettingsRepository = settingsRepository;
     }
 
     // GET
