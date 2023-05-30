@@ -452,3 +452,9 @@ $RECYCLE.BIN/
 !.vscode/tasks.json
 !.vscode/launch.json
 !.vscode/extensions.json
+/.vs/BTCPayServer.Plugins.Dolibarr/DesignTimeBuild/.dtbcache.v2
+/.vs/BTCPayServer.Plugins.Dolibarr/v17/.suo
+/.vs/BTCPayServer.Plugins.Dolibarr/v17/fileList.bin
+/.vs/BTCPayServer.Plugins.Dolibarr/v17/.futdcache.v2
+/.vs/ProjectEvaluation/btcpayserver.plugins.dolibarr.projects.v6.1
+/.vs/ProjectEvaluation/btcpayserver.plugins.dolibarr.metadata.v6.1
