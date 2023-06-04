@@ -8,7 +8,7 @@ using System.Xml.Linq;
 
 namespace BTCPayServer.Plugins.Dolibarr.Data
 {
-    internal class DolibarSettings
+    public class DolibarSettings
     {
         [Display(Name = "URL of your Dolibarr Rest API")]
         public string Url { get; set; }

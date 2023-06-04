@@ -1,21 +1,53 @@
 @using BTCPayServer.Abstractions.Extensions
 @using BTCPayServer.Plugins.Dolibarr.Views
-@model BTCPayServer.Plugins.Dolibarr.PluginPageViewModel
+@model BTCPayServer.Plugins.Dolibarr.Data.DolibarSettings
 @{
     ViewData.SetActivePage(PluginNavPages.Index, "Plugin Template");
 }
 <h1>@ViewData["Title"]</h1>
-<p>Here is an image loaded from the plugin</p>
 
-
-<h2>Persisted Data</h2>
+<br />
 <p>
-    The following is data persisted to the configured database but in an isolated DbContext.
-    Every time you start BTCPay Server with this plugin enabled, a timestamp is logged.
+    This plugin allows you to receive notifications about events occurring on the Bdd server.<br />
+    These notifications can be sent to Telegram and/or Slack, specifying a minimum level of severity for each.<br />
+    <a href="https://github.com/Nisaba/btcpayserver-plugin-serilog#readme" target="_blank" rel="noreferrer noopener">Documentation here</a>
 </p>
-<ul class="list-group">
-    @foreach (var item in Model.Data)
-    {
-        <li class="list-group-item">@item.Id at @item.Timestamp.ToString("F")</li>
-    }
-</ul>
+<br />
+
+<partial name="_StatusMessage" />
+
+<form method="post" autocomplete="off">
+
+    <table class="table table-sm mt-0 mx-0">
+        <tr>
+            <td class="border-0 ps-0 align-middle">
+                <label asp-for="Url" class="form-label"></label>
+                <input asp-for="Url" data-fill="port" class="form-control" placeholder="https://yourdolibar.com/api/" />
+                <span asp-validation-for="Url" class="text-danger"></span>
+            </td>
+            <td width="20" />
+            <td class="border-0 ps-0 align-middle">
+                <label asp-for="Token" class="form-label"></label>
+                <input asp-for="Token" data-fill="port" class="form-control" />
+                <span asp-validation-for="Token" class="text-danger"></span>
+            </td>
+        </tr>
+    </table>
+
+    <div class="form-group">
+        <label asp-for="Currency" class="form-label"></label>
+        <input asp-for="Currency" data-fill="port" class="form-control" />
+        <span asp-validation-for="Currency" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="BankAccountID" class="form-label"></label>
+        <input asp-for="BankAccountID" data-fill="port" class="form-control" />
+        <span asp-validation-for="BankAccountID" class="text-danger"></span>
+    </div>
+
+    <br>
+    <div class="order-1">
+        <button id="SaveButton" type="submit" class="btn btn-primary" name="command" value="Save">Save</button>
+    </div>
+</form>
