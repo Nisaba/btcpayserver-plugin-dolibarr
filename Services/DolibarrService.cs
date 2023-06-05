@@ -15,7 +15,7 @@ public class DolibarrService
         _PluginDbContextFactory = PluginDbContextFactory;
     }
 
-    public async Task AddTestDataRecord()
+    public async Task SendInvoice()
     {
         await using var context = _PluginDbContextFactory.CreateContext();
 

@@ -1,8 +1,10 @@
 @using BTCPayServer.Abstractions.Extensions
-@using BTCPayServer.Plugins.Template.Views
+@using BTCPayServer.Plugins.Dolibarr.Views
 @using Microsoft.AspNetCore.Mvc.TagHelpers
 
-<li class="nav-item">
+@using BTCPayServer.Client
+
+<li class="nav-item" permission="@Policies.CanModifyServerSettings">
     <a asp-controller="UIPlugin" asp-action="Index" class="nav-link @ViewData.IsActivePage(PluginNavPages.Index)">
         <img src="/Resources/img/Dolibarr.png" />&nbsp;
         <span>Dolibarr Plugin</span>

@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using BTCPayServer.Abstractions.Constants;
@@ -23,14 +24,36 @@ public class UIPluginController : Controller
         _SettingsRepository = settingsRepository;
     }
 
-    // GET
+
+    [HttpGet]
     public async Task<IActionResult> Index()
     {
-        return View(new PluginPageViewModel { Data = await _PluginService.Get() });
+        var settings = (await _SettingsRepository.GetSettingAsync<DolibarrSettings>()) ?? new DolibarrSettings();
+        return View(settings);
     }
-}
 
-public class PluginPageViewModel
-{
-    public List<PluginData> Data { get; set; }
+    [HttpPost]
+    public async Task<IActionResult> Index(DolibarrSettings model, string command)
+    {
+        switch (command)
+        {
+            case "Test":
+                try
+                {
+                }
+                catch (Exception e)
+                {
+                    TempData[WellKnownTempData.ErrorMessage] = $"Dolibarr access error : {e.Message}";
+                }
+                break;
+            case "Save":
+                await _SettingsRepository.UpdateSetting(model);
+                TempData[WellKnownTempData.SuccessMessage] = "Log settings saved.";
+                break;
+            default:
+                break;
+        }
+        return View("Index", model);
+    }
+
 }
