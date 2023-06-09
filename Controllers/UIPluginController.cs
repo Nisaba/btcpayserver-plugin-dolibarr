@@ -35,23 +35,29 @@ public class UIPluginController : Controller
     [HttpPost]
     public async Task<IActionResult> Index(DolibarrSettings model, string command)
     {
-        switch (command)
+        if (ModelState.IsValid)
         {
-            case "Test":
-                try
-                {
-                }
-                catch (Exception e)
-                {
-                    TempData[WellKnownTempData.ErrorMessage] = $"Dolibarr access error : {e.Message}";
-                }
-                break;
-            case "Save":
-                await _SettingsRepository.UpdateSetting(model);
-                TempData[WellKnownTempData.SuccessMessage] = "Log settings saved.";
-                break;
-            default:
-                break;
+            switch (command)
+            {
+                case "Test":
+                    try
+                    {
+                    }
+                    catch (Exception e)
+                    {
+                        TempData[WellKnownTempData.ErrorMessage] = $"Dolibarr access error : {e.Message}";
+                    }
+                    break;
+                case "Save":
+                    await _SettingsRepository.UpdateSetting(model);
+                    TempData[WellKnownTempData.SuccessMessage] = "Log settings saved.";
+                    break;
+                default:
+                    break;
+            }
+        } else
+        {
+            TempData[WellKnownTempData.ErrorMessage] = "Data are not valid";
         }
         return View("Index", model);
     }

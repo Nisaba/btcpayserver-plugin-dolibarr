@@ -11,6 +11,7 @@ namespace BTCPayServer.Plugins.Dolibarr.Data
     public class DolibarrSettings
     {
         [Display(Name = "URL of your Dolibarr Rest API")]
+        [Url]
         [Required]
         public string Url { get; set; }
 
@@ -19,11 +20,11 @@ namespace BTCPayServer.Plugins.Dolibarr.Data
         public string Token{ get; set; }
 
         [Display(Name = "Main currency of your Dolibarr instance")]
-        [MaxLength(3)]
+        [StringLength(3)]
         [Required]
         public string Currency { get; set; }
 
-        [Display(Name = "The ID of your BTC account in Dolibarr")]
+        [Display(Name = "The ID of your BTC bank account in Dolibarr")]
         [Required]
         public int BankAccountID { get; set;}
 
