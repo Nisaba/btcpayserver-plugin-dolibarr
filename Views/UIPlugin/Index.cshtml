@@ -39,7 +39,7 @@
         <tr>
             <td class="border-0 ps-0 align-middle">
                 <label asp-for="Url" class="form-label"></label>
-                <input asp-for="Url" data-fill="port" class="form-control" placeholder="https://yourdolibar.com/api/" />
+                <input asp-for="Url" data-fill="port" class="form-control" placeholder="https://yourdolibarr.com/" />
                 <span asp-validation-for="Url" class="text-danger"></span>
             </td>
             <td width="20" />
@@ -66,6 +66,11 @@
             </td>
         </tr>
     </table>
+    <div class="form-group">
+        <input asp-for="IsEnabled" type="checkbox" class="form-check-input" />
+        <label asp-for="IsEnabled" class="form-check-label"></label>
+        <span asp-validation-for="IsEnabled" class="text-danger"></span>
+    </div>
 
     <br>
     <div class="order-1">

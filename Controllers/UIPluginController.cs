@@ -37,11 +37,23 @@ public class UIPluginController : Controller
     {
         if (ModelState.IsValid)
         {
+            if (!model.Url.EndsWith("/")) model.Url += "/";
+
             switch (command)
             {
                 case "Test":
                     try
                     {
+                        var srv = new DolibarrService();
+                        var rep = await srv.DoTest(model);
+                        if (rep == "OK")
+                        {
+                            await _SettingsRepository.UpdateSetting(model);
+                            TempData[WellKnownTempData.SuccessMessage] = "Dolibarr access OK !";
+                        } else
+                        {
+                            TempData[WellKnownTempData.ErrorMessage] = $"Dolibarr access error : {rep}";
+                        }
                     }
                     catch (Exception e)
                     {

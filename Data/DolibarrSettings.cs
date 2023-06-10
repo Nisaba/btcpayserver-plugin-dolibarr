@@ -28,5 +28,8 @@ namespace BTCPayServer.Plugins.Dolibarr.Data
         [Required]
         public int BankAccountID { get; set;}
 
+        [Display(Name = "Dolibarr plugin enabled")] 
+        public bool IsEnabled { get; set; }
+
     }
 }
